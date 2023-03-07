@@ -12,6 +12,8 @@ navBar.innerHTML = `
           </button>
           <button class="buttonNav" id = "botonVaciarCarrito">vaciar carrito
           </button>
+          <button class="buttonNav" id = "botonFinalizarCompra">Finalizar compra
+          </button>
         </li>
       </ul>
       `
@@ -78,7 +80,6 @@ const verCarrito = document.getElementById("botonVerCarrito"); /*Recordar boton 
 
 verCarrito.addEventListener("click", ( )=> {
 vemosCarrito();
-muestroCosto();
 costo();
 })
 
@@ -140,19 +141,44 @@ const eliminamosTodo = () => {
   localStorage.clear();
 }
 
-// COSTO TOTAL COMPRA - ESTOY PROBANDO 
+// COSTO TOTAL COMPRA 
 const costoCompra = document.getElementById("costo");
 
 const costo = () => {
   let total = carrito.reduce((acumulador, producto) => acumulador  + (producto.cantidad * producto.precio), 0);
   console.log(total);
-  // costoCompra.innerHTML = `<p class="compra">Total de la compra: $${total}</p>`;
+  costoCompra.innerHTML = `<p class="compra">Total de la compra: $${total}</p>`;
   }
 
-  const muestroCosto = () => {
-    const mostrar = document.createElement("div");
-    mostrar.innerHTML = `<p class="compra">Total de la compra: </p>`;
-    costoCompra.appendChild(mostrar);
-  } 
+// FINALIZAR COMPRA - BOTON CREADO EN EL NAV
+const finalizar = document.getElementById("botonfinalizarCompra");
+
+// FUNCION FINALIZAR COMPRA
+const vemosFinalizarCompra = () => {
+  const formFinalizar =  document.createElement("div");
+  formFinalizar.innerHTML =  `<form>
+  <div class="mb-3 contenedorForm">
+    <label for="exampleInputEmail1" class="labelForm">Ingrese su nombre</label>
+    <input type="text" class="form-control textInput" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <label for="exampleInputEmail1" class="labelForm">Email</label>
+    <input type="email" class="form-control textInput" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <label for="exampleInput" class="labelForm">Ingrese dirección para enviar pedido.</label>
+    <input type="email" class="form-control textInput" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <p>El pago se realiza cuando el pedido se entrega</p>
+    <button id="botonEnviar">Enviar</button>
+  </div>`;
+  
+  finalizar.appendChild(formFinalizar);
+} 
+
+finalizar.addEventListener("click", () => {
+  vemosFinalizarCompra();
+});
+
+
+
+
+
+
 
   
