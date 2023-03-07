@@ -22,6 +22,10 @@ const arrayProductos = [hamburguesa1, hamburguesa2, hamburguesa3, hamburguesa4, 
 
 let carrito = [];
 
+if(localStorage.getItem("carrito")) {
+  carrito = JSON.parse(localStorage.getItem("carrito"))
+}
+
 // CONTENEDOR PARA PODER MOSTRAR PRODUCTOS 
 
 const mostramosHamburguesas = document.getElementById("mostrarProductos");
@@ -56,11 +60,14 @@ const agregar = (id) => {
   const enCarrito = carrito.find(producto => producto.id === id);
   if(enCarrito) {
       enCarrito.cantidad++;
+      costo();
   }else {
       const producto = arrayProductos.find(producto => producto.id === id);
       carrito.push(producto);
+      costo();
   }
   console.log(carrito);
+  localStorage.setItem("carrito", JSON.stringify(carrito))
 }
 
 // MOSTRAMOS Y ELIMINAMOS PRODUCTOS EN CARRITO 
@@ -70,9 +77,17 @@ const verCarrito = document.getElementById("botonVerCarrito"); /*Recordar boton 
 
 
 verCarrito.addEventListener("click", ( )=> {
-vemosCarrito()
+vemosCarrito();
+muestroCosto();
+costo();
 })
 
+// TITULO CARRITO
+const titulo = document.getElementById("tituloCarrito");
+
+const etiquetaTitulo = document.createElement("div");
+etiquetaTitulo.innerHTML = `<div class="divTitulo"><p class="tituloCarrito">Carrito de Compras</p></div>`
+titulo.appendChild(etiquetaTitulo);
 
 const vemosCarrito = () => {
   carritoMostrarDom.innerHTML = [];
@@ -80,7 +95,7 @@ const vemosCarrito = () => {
      const cardBs = document.createElement("div");
       cardBs.classList.add("col-xl-3", "col-md-6");
       cardBs.innerHTML =     
-        ` <div>CARRITO dsps mejorar</div>
+        ` 
           <div class="card cardProductos">
           <img src= ${producto.img} alt= ${producto.nombre}>
           <div class="card-body">
@@ -104,7 +119,11 @@ const eliminamosProducto = (id) => {
     const indice = carrito.indexOf(productoEliminado);
     carrito.splice(indice,1);
     vemosCarrito();
-// ACA TENGO QUE VER COMO AHCER PARA MODIFICAR LA CANTIDAD A ELIMINAR
+    costo()
+
+    localStorage.setItem("carrito", JSON.stringify(carrito))
+
+// ACA TENGO QUE VER COMO HACER PARA MODIFICAR LA CANTIDAD A ELIMINAR
 } 
 
 const vaciar = document.getElementById("botonVaciarCarrito");
@@ -116,178 +135,24 @@ vaciar.addEventListener("click", () => {
 const eliminamosTodo = () => {
   carrito = [];
   vemosCarrito();
+  costo();
+
+  localStorage.clear();
 }
 
-
+// COSTO TOTAL COMPRA - ESTOY PROBANDO 
 const costoCompra = document.getElementById("costo");
 
 const costo = () => {
   let total = carrito.reduce((acumulador, producto) => acumulador  + (producto.cantidad * producto.precio), 0);
   console.log(total);
+  // costoCompra.innerHTML = `<p class="compra">Total de la compra: $${total}</p>`;
   }
 
-  costoCompra.innerHTML = `El Total es de $${total}`;
+  const muestroCosto = () => {
+    const mostrar = document.createElement("div");
+    mostrar.innerHTML = `<p class="compra">Total de la compra: </p>`;
+    costoCompra.appendChild(mostrar);
+  } 
 
   
-
-
-
-
-
-// CODIGO  BORRADOR NO USAR
-// const vemosCarrito = () => {
-      // contenedorMostrar.innerHTML = "";
-      // carrito.forEach(producto => {
-      // const cardBs = document.createElement("div");
-      // cardBs.classList.add("col-xl-3", "col-md-6");
-      // cardBs.innerHTML =
-      //   `<div class="card cardProductos">
-      //     <img src= ${producto.img} alt= ${producto.nombre}>
-      //     <div class="card-body">
-      //     <h2 class="card-title">${producto.nombre}</h2>
-      //     <p> Cantidad: ${producto.cantidad} </p>
-      //     <p class="card-text">$ ${producto.precio}</p></div>;
-      //     <button class="btn btn-dark" id = "botonEliminar${producto.id}">eliminar del carrito</button>
-      //     </div>`;
-      
-      // carritoMostrarDom.appendChild(cardBS)
-
-
-
-// MOSTRAR PRODCUTOS AGREGADOS EN CARRITO - RECORDAR BOTON CREADO EN EL NAV
-// const verCarrito = document.getElementById("botonVerCarrito");
-// const contenedorMostrar = document.getElementById("contenedorMostrar");
-
-// verCarrito.addEventListener("click", () => {
-//   mostrarCarrito();
-// })
-
-// verCarrito.addEventListener("click", ( )=> {
-//   console.log("funciona?");
-// const mostrarCarrito = () => {
-//   contenedorMostrar.innerHTML = "";
-//     carrito.forEach(producto => {
-//     const cardBs = document.createElement("div");
-//     cardBs.classList.add("col-xl-3", "col-md-6");
-//     cardBs.innerHTML =
-//       `<div class="card cardProductos">
-//         <img src= ${producto.img} alt= ${producto.nombre}>
-//         <div class="card-body">
-//         <h2 class="card-title">${producto.nombre}</h2>
-//         <p> Cantidad: ${producto.cantidad} </p>
-//         <p class="card-text">$ ${producto.precio}</p></div>;
-//         <button class="btn btn-dark" id = "botonEliminar${producto.id}">eliminar del carrito</button>
-//         </div>`;
-    
-//   contenedorMostrar.appendChild(cardBs); 
-  
-//   const boton = document.getElementById(`botoneliminar${producto.id}`);
-//   boton.addEventListener("click", () => {
-//       eliminarDelCarrito(producto.id);
-//   })
-
-
-//   })  
-
-// CALCULAR EL TOTAL CARRITO  
-// let total = carrito.reduce((acumulador, producto) => acumulador  + (producto.cantidad * producto.precio), 0);
-// const compra = document.createElement("div");
-// compra = document.className = "totalCompra";
-// compra.innerHTML = `<p2 class="compra">Total a pagar: $${total}</p>`;
-// contenedorMostrar.appendChild(compra);
-
-// };
-
-
-// const eliminarDelCarrito = (id) => {
-//   const producto = carrito.find(producto => producto.id === id);
-//   const indice = carrito.indexOf(producto);
-//   carrito.splice(indice,1);
-//   verProductos();
-
-  //LocalStorage: 
-//   localStorage.setItem("carrito", JSON.stringify(carrito));
-// }
-
-
-// VACIAR CARRITO
-// const botonvaciar = document.getElementById("botonVaciar");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// agregar = (id) => {
-//         const agregarHamburg = carrito.find(producto => producto.id === id);
-//         if (agregarHamburg) {
-//           agregarHamburg.cantidad++
-//         } else {
-//           const producto = arrayProductos.find(producto => producto.id === id);
-//           carrito.push(producto);
-//         }
-//       }
-
-
-    // let agregar = document.createElement("button");
-    // agregar.innerText = "Añadir al carrito";
-    // agregar.classList = ("btn btn-dark");
-    // compra.classList.add("btn btn-dark"); PENSAR PORQUE ASI NO FUNCIONA
-
-    // cardBs.appendChild(agregar);
-
-    // agregar.addEventListener("click", () => {
-    //   carrito.push(producto)
-    //   console.log(carrito);
-
-    // })
-
-
-
-    // FUNCION ENCONTRAR Y PUSH AL CARRITO
-//     function agregar() {
-//       const boton = document.getElementById(`boton${producto.id}`);
-//       const agregarHamburg = carrito.find(producto => producto.id === boton);
-
-//       if (agregarHamburg) {
-//         agregarHamburg.cantidad++
-//       } else {
-//         agregarHamburg = 1;
-//         arrayProductos.push(agregarHamburg)
-//       }
-    
-//     // EVENTO 
-//       boton.addEventListener("click", () => {
-//       carrito.push(producto)
-//       console.log(carrito);
-//     })
-//   };
-
-// agregar.addEventListener("click", () => {
-//   carrito.push(producto)
-//   console.log(carrito);
-// })
-
-// BOTON NAV PARA MOSTRAR COMPRA
-// const botonVerCarrito = document.getElementById("botonVerCarrito");
-
-// botonVerCarrito.addEventListener("click", () => {
-//   console.log("prueba");
-//   botonVerCarrito.createElement("div");
-//   botonVerCarrito.className("botonCarrito");
-//   botonVerCarrito.innerHTML
-// })
