@@ -152,28 +152,49 @@ const costo = () => {
 
 // FINALIZAR COMPRA - BOTON CREADO EN EL NAV
 const finalizar = document.getElementById("botonfinalizarCompra");
-
-// FUNCION FINALIZAR COMPRA
-const vemosFinalizarCompra = () => {
-  const formFinalizar =  document.createElement("div");
-  formFinalizar.innerHTML =  `<form>
-  <div class="mb-3 contenedorForm">
-    <label for="exampleInputEmail1" class="labelForm">Ingrese su nombre</label>
-    <input type="text" class="form-control textInput" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <label for="exampleInputEmail1" class="labelForm">Email</label>
-    <input type="email" class="form-control textInput" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <label for="exampleInput" class="labelForm">Ingrese dirección para enviar pedido.</label>
-    <input type="email" class="form-control textInput" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <p>El pago se realiza cuando el pedido se entrega</p>
-    <button id="botonEnviar">Enviar</button>
-  </div>`;
-  
-  finalizar.appendChild(formFinalizar);
-} 
+// const mostrarFinalizar = document.getElementById("mostrarFinalizar");
 
 finalizar.addEventListener("click", () => {
-  vemosFinalizarCompra();
-});
+    const formFinalizar = document.createElement("div");
+    formFinalizar.innerHTML =  `<form>
+    <div class="mb-3 contenedorForm">
+      <label for="exampleInputEmail1" class="labelForm">Ingrese su nombre</label>
+      <input type="text" class="form-control textInput" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <label for="exampleInputEmail1" class="labelForm">Email</label>
+      <input type="email" class="form-control textInput" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <label for="exampleInput" class="labelForm">Ingrese dirección para enviar pedido.</label>
+      <input type="email" class="form-control textInput" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <p>El pago se realiza cuando el pedido se entrega</p>
+      <button id="botonEnviar">Enviar</button>
+    </div>`;
+    
+    mostramosHamburguesas.appendChild(formFinalizar);
+  });
+
+
+
+
+// FUNCION FINALIZAR COMPRA - NO FUNCIONA
+// const vemosFinalizarCompra = () => {
+//   const formFinalizar = document.createElement("div");
+//   formFinalizar.innerHTML =  `<form>
+//   <div class="mb-3 contenedorForm">
+//     <label for="exampleInputEmail1" class="labelForm">Ingrese su nombre</label>
+//     <input type="text" class="form-control textInput" id="exampleInputEmail1" aria-describedby="emailHelp">
+//     <label for="exampleInputEmail1" class="labelForm">Email</label>
+//     <input type="email" class="form-control textInput" id="exampleInputEmail1" aria-describedby="emailHelp">
+//     <label for="exampleInput" class="labelForm">Ingrese dirección para enviar pedido.</label>
+//     <input type="email" class="form-control textInput" id="exampleInputEmail1" aria-describedby="emailHelp">
+//     <p>El pago se realiza cuando el pedido se entrega</p>
+//     <button id="botonEnviar">Enviar</button>
+//   </div>`;
+  
+//   finalizar.appendChild(formFinalizar);
+// } 
+
+// const finalizar = document.getElementById("botonfinalizarCompra");
+
+// 
 
 
 
