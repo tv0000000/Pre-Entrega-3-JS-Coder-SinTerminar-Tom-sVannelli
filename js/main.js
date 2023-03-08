@@ -70,7 +70,6 @@ const agregar = (id) => {
     carrito.push(producto);
     costo();
   }
-  console.log(carrito);
   localStorage.setItem("carrito", JSON.stringify(carrito))
 }
 
@@ -104,7 +103,7 @@ const vemosCarrito = () => {
           <div class="card-body">
           <h2 class="card-title">${producto.nombre}</h2>
           <p> Cantidad: ${producto.cantidad} </p>
-          <p class="card-text">$ ${producto.precio}</p></div>;
+          <p class="card-text">$ ${producto.precio}</p></div>
           <button class="btn btn-dark" id ="botonEliminar${producto.id}">eliminar del carrito</button>
           </div>`;
 
@@ -156,7 +155,7 @@ const costo = () => {
 const finalizar = document.getElementById("botonFinalizarCompra"); /*Recordar boton creado en el NAV.*/
 
 // CONST PRUEBA MENSAJE FINAL
-const mensajeFinal = document.getElementById("mensajeFinal")
+// const mensajeFinal = document.getElementById("mensajeFinal")
 
 
 finalizar.addEventListener("click", () => {
@@ -166,36 +165,51 @@ finalizar.addEventListener("click", () => {
       <label for="exampleInputEmail1" class="labelForm">Ingrese su nombre</label>
       <input id = "inputNombre" type="text" class="form-control textInput" id="exampleInputEmail1" aria-describedby="emailHelp">
       <label for="exampleInputEmail1" class="labelForm">Email</label>
-      <input type="email" class="form-control textInput" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <input id = "inputMail" type="email" class="form-control textInput" id="exampleInputEmail1" aria-describedby="emailHelp">
       <label for="exampleInput" class="labelForm">Ingrese dirección para enviar pedido.</label>
-      <input type="text" class="form-control textInput" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <input id = "inputDir" type="text" class="form-control textInput" id="exampleInputEmail1" aria-describedby="emailHelp">
       <p>El pago se realiza cuando el pedido se entrega</p>
       <button class="btn btn-warning">Enviar</button>
+      <button id = "botonSalir" class="btn btn-warning">Salir</button>
     `;
     carritoMostrarDom.appendChild(formFinalizar);
+
+
+
+
+  // FUNCION PARA SALIR
+  const botonSalir = document.getElementById("botonSalir");
+  console.log(botonSalir);
+  botonSalir.addEventListener("click", ()=> {
+    carrito = [];
+    verProductos()
+  })
+
 
   //  BOTON ENVIAR
 
   const inputNombre = document.getElementById("inputNombre");
   console.log(inputNombre);
-
+  const inputMail = document.getElementById("inputMail");
+  console.log(inputMail);
+  const inputDir = document.getElementById("inputDir");
+  console.log(inputDir);
+  
   const botonEnviar = document.getElementById("formEnviar");
   console.log(botonEnviar);
   botonEnviar.addEventListener("submit", (e) => {
     e.preventDefault()
-    if(inputNombre.value == ""){
+    if(inputNombre.value == "" || inputMail.value == "" || inputDir == ""){
       const noEnviar = document.createElement("div");
-      noEnviar.innerHTML = `<h3>no ingreso datos para envio</h3>`
+      noEnviar.innerHTML = `<h3>No ingreso datos para envio</h3>`
+      carritoMostrarDom.appendChild(noEnviar);
     }else{
     const enviar = document.createElement("div");
       enviar.innerHTML = `<h3>Muchas gracias su pedido está en camino</h3>`
-    carritoMostrarDom.appendChild(enviar);}
-
+    carritoMostrarDom.appendChild(enviar);
+  }
   });
 });
-
-
-
 
 // BOTON MODO /*Recordar boton creado en el NAV.*/
 const botonModo = document.getElementById("botonModo");
@@ -216,6 +230,7 @@ if (modoClaroOscuro === "oscuro") {
 } else {
   document.body.classList.remove("oscuro");
 }
+
 
 
 
