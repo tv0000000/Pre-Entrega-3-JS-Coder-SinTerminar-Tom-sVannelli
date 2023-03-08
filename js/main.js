@@ -174,20 +174,14 @@ finalizar.addEventListener("click", () => {
     `;
     carritoMostrarDom.appendChild(formFinalizar);
 
-
-
-
-  // FUNCION PARA SALIR
+  // FUNCION Y BOTON PARA SALIR
   const botonSalir = document.getElementById("botonSalir");
   console.log(botonSalir);
   botonSalir.addEventListener("click", ()=> {
-    carrito = [];
-    verProductos()
+    eliminamosTodo();
   })
 
-
   //  BOTON ENVIAR
-
   const inputNombre = document.getElementById("inputNombre");
   console.log(inputNombre);
   const inputMail = document.getElementById("inputMail");
