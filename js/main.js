@@ -154,36 +154,46 @@ const costo = () => {
 
 // FINALIZAR COMPRA
 const finalizar = document.getElementById("botonFinalizarCompra"); /*Recordar boton creado en el NAV.*/
-// const mostrarFinalizar = document.getElementById("mostrarFinalizar");
+
+// CONST PRUEBA MENSAJE FINAL
+const mensajeFinal = document.getElementById("mensajeFinal")
+
 
 finalizar.addEventListener("click", () => {
   vemosCarrito();
   const formFinalizar = document.createElement("div");
-  formFinalizar.innerHTML = `<form>
-    <div class="mb-3 contenedorForm formFianlizar">
+  formFinalizar.innerHTML = `<form class="mb-3 contenedorForm formFianlizar" id= "formEnviar">
       <label for="exampleInputEmail1" class="labelForm">Ingrese su nombre</label>
-      <input type="text" class="form-control textInput" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <input id = "inputNombre" type="text" class="form-control textInput" id="exampleInputEmail1" aria-describedby="emailHelp">
       <label for="exampleInputEmail1" class="labelForm">Email</label>
       <input type="email" class="form-control textInput" id="exampleInputEmail1" aria-describedby="emailHelp">
       <label for="exampleInput" class="labelForm">Ingrese dirección para enviar pedido.</label>
       <input type="text" class="form-control textInput" id="exampleInputEmail1" aria-describedby="emailHelp">
       <p>El pago se realiza cuando el pedido se entrega</p>
-      <button class="btn btn-warning" id="botonEnviar">Enviar</button>
-    </div>`;
+      <button class="btn btn-warning">Enviar</button>
+    `;
     carritoMostrarDom.appendChild(formFinalizar);
-  costo()
-  // VER COMO PUEDO ALMACENAR ESTO EN EL LOCAL STORAGE
+
+  //  BOTON ENVIAR
+
+  const inputNombre = document.getElementById("inputNombre");
+  console.log(inputNombre);
+
+  const botonEnviar = document.getElementById("formEnviar");
+  console.log(botonEnviar);
+  botonEnviar.addEventListener("submit", (e) => {
+    e.preventDefault()
+    if(inputNombre.value == ""){
+      const noEnviar = document.createElement("div");
+      noEnviar.innerHTML = `<h3>no ingreso datos para envio</h3>`
+    }else{
+    const enviar = document.createElement("div");
+      enviar.innerHTML = `<h3>Muchas gracias su pedido está en camino</h3>`
+    carritoMostrarDom.appendChild(enviar);}
+
+  });
 });
 
-
-//  BOTON ENVIAR NO FUNCIONA
-const botonEnviar = document.getElementById("botonEnviar");/*Recordar boton creado en Finalizar Compra*/
-
-botonEnviar.addEventListener("click", () => {
-  const enviar = document.createElement("div");
-  enviar.innerHTML = `<h3>Muchas gracias su pedido está en camino</h3>`
-  carritoMostrarDom.appendChild(enviar);
-});
 
 
 
