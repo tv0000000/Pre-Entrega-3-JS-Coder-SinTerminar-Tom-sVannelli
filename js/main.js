@@ -192,20 +192,22 @@ finalizar.addEventListener("click", () => {
   // MENSAJE FORM
   const mensajeForm = document.getElementById("mensajeFinalizar")
   console.log(mensajeForm);
-  carritoMostrarDom.appendChild(mensajeForm);
+  carritoMostrarDom.appendChild(mensajeForm)
 
   const botonEnviar = document.getElementById("formEnviar");
   console.log(botonEnviar);
   botonEnviar.addEventListener("submit", (e) => {
     e.preventDefault()
     if (inputNombre.value == "" || inputMail.value == "" || inputDir.value == "") {
-      const noEnviar = document.createElement("div");
-      noEnviar.innerHTML = `<h3>No ingreso datos para envio</h3>`
-      carritoMostrarDom.appendChild(noEnviar);
+      mensajeForm.innerHTML = `<h3>No ingreso datos para envio</h3>`
+      setTimeout(() => {
+        mensajeForm.innerHTML = '';
+      }, 3000);
     } else {
-      const enviar = document.createElement("div");
-      enviar.innerHTML = `<h3>Muchas gracias su pedido está en camino</h3>`
-      carritoMostrarDom.appendChild(enviar);
+      mensajeForm.innerHTML = `<h3>Muchas gracias su pedido está en camino</h3>` 
+      setTimeout(() => {
+        mensajeForm.innerHTML = '';
+      }, 3000);
     }
   });
 });
