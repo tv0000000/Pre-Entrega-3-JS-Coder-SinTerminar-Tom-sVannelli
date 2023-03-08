@@ -157,6 +157,7 @@ const finalizar = document.getElementById("botonFinalizarCompra"); /*Recordar bo
 // const mostrarFinalizar = document.getElementById("mostrarFinalizar");
 
 finalizar.addEventListener("click", () => {
+  vemosCarrito();
   const formFinalizar = document.createElement("div");
   formFinalizar.innerHTML = `<form>
     <div class="mb-3 contenedorForm formFianlizar">
@@ -183,8 +184,6 @@ botonEnviar.addEventListener("click", () => {
   enviar.innerHTML = `<h3>Muchas gracias su pedido está en camino</h3>`
   carritoMostrarDom.appendChild(enviar);
 });
-
-
 
 
 
