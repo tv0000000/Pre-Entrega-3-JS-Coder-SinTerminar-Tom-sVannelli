@@ -172,12 +172,12 @@ finalizar.addEventListener("click", () => {
       <button class="btn btn-warning">Enviar</button>
       <button id = "botonSalir" class="btn btn-warning">Salir</button>
     `;
-    carritoMostrarDom.appendChild(formFinalizar);
+  carritoMostrarDom.appendChild(formFinalizar);
 
   // FUNCION Y BOTON PARA SALIR
   const botonSalir = document.getElementById("botonSalir");
   console.log(botonSalir);
-  botonSalir.addEventListener("click", ()=> {
+  botonSalir.addEventListener("click", () => {
     eliminamosTodo();
   })
 
@@ -188,20 +188,25 @@ finalizar.addEventListener("click", () => {
   console.log(inputMail);
   const inputDir = document.getElementById("inputDir");
   console.log(inputDir);
-  
+
+  // MENSAJE FORM
+  const mensajeForm = document.getElementById("mensajeFinalizar")
+  console.log(mensajeForm);
+  carritoMostrarDom.appendChild(mensajeForm);
+
   const botonEnviar = document.getElementById("formEnviar");
   console.log(botonEnviar);
   botonEnviar.addEventListener("submit", (e) => {
     e.preventDefault()
-    if(inputNombre.value == "" || inputMail.value == "" || inputDir == ""){
+    if (inputNombre.value == "" || inputMail.value == "" || inputDir.value == "") {
       const noEnviar = document.createElement("div");
       noEnviar.innerHTML = `<h3>No ingreso datos para envio</h3>`
       carritoMostrarDom.appendChild(noEnviar);
-    }else{
-    const enviar = document.createElement("div");
+    } else {
+      const enviar = document.createElement("div");
       enviar.innerHTML = `<h3>Muchas gracias su pedido está en camino</h3>`
-    carritoMostrarDom.appendChild(enviar);
-  }
+      carritoMostrarDom.appendChild(enviar);
+    }
   });
 });
 
